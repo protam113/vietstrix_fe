@@ -5,7 +5,7 @@ import Link from 'next/link';
 import GetStartedButton from '@/components/animata/container/AnimatedTrailProps';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Mail, Phone, X } from 'lucide-react';
+import { ChevronDown, ChevronLeft, Mail, Phone, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Container from '@/components/container/container';
 import { DesButton } from '@/components/block/desButton';
@@ -29,7 +29,16 @@ export const TopHeader = () => {
 
 export function Navbar() {
   const router = useRouter();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    setActiveMenu(null);
+    setActiveSubmenu(null);
+  };
 
   const navItems = [
     { name: 'Trang Chủ', href: '/' },
@@ -39,11 +48,14 @@ export function Navbar() {
     { name: 'Sản Phẩm', href: '/products' },
   ];
 
-  const handleMenuClick = () => {
-    router.push('/contact');
+  const handleMenuClick = (menu: string) => {
+    if (activeMenu === menu) {
+      setActiveMenu(null);
+    } else {
+      setActiveMenu(menu);
+      setActiveSubmenu(null);
+    }
   };
-
-  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -281,6 +293,18 @@ export function Navbar() {
     setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
+  const handleSubmenuClick = (submenu: string) => {
+    setActiveSubmenu(activeSubmenu === submenu ? null : submenu);
+  };
+
+  const handleBackClick = () => {
+    if (activeSubmenu) {
+      setActiveSubmenu(null);
+    } else {
+      setActiveMenu(null);
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
@@ -298,6 +322,7 @@ export function Navbar() {
                 className="object-cover"
               />
             </div>
+            {/* Mobile view (small screen) */}
             <span
               className={`text-2xl font-bold ml-[2px] ${
                 isScrolling ? 'text-main' : 'text-white'
@@ -306,6 +331,7 @@ export function Navbar() {
               IETSTRIX
             </span>
           </Link>
+
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center">
             <div className="relative">
@@ -314,7 +340,7 @@ export function Navbar() {
                   <li key={item.name} className="relative">
                     <button
                       className={cn(
-                        'flex items-center py-2 text-base font-medium hover:text-main-100 hover:underline',
+                        'flex items-center py-2 text-base font-medium hover:text-main-800 hover:underline',
                         isScrolling ? 'text-main' : 'text-white', // Đây mới là đúng
                         activeDropdown === item.name && 'underline'
                       )}
@@ -347,6 +373,29 @@ export function Navbar() {
               isScrolling={isScrolling}
             />
           </div>
+
+          <div className="lg:hidden">
+            <button
+              className={`${isScrolling ? 'text-main' : 'text-white'}`}
+              onClick={toggleMobileMenu}
+              aria-label="Open menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -368,6 +417,201 @@ export function Navbar() {
             </div>
           )
       )}
+
+      {/* Mobile Menu */}
+      <div
+        className={cn(
+          'fixed inset-0 bg-white bg-opacity-50 z-50 lg:hidden transition-opacity duration-300',
+          mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        onClick={toggleMobileMenu}
+      >
+        <div
+          className={cn(
+            'fixed inset-y-0 right-0 max-w-full w-full bg-white text-white transition-transform duration-300 ease-in-out transform',
+            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-gray-700">
+            {activeMenu ? (
+              <button
+                className="flex items-center text-black"
+                onClick={handleBackClick}
+              >
+                <ChevronLeft className="h-5 w-5 mr-1" />
+                {activeSubmenu ? activeMenu : 'Back'}
+              </button>
+            ) : (
+              <Link href="/" className="flex items-center ml-4">
+                <div className="relative w-[30px] h-[30px] flex-shrink-0">
+                  <Image
+                    src="/icons/logo.svg"
+                    alt="Logo"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-2xl font-bold ml-[2px] text-main">
+                  IETSTRIX
+                </span>
+              </Link>
+            )}
+            <button
+              className="p-2 text-black"
+              onClick={toggleMobileMenu}
+              aria-label="Close menu"
+            >
+              {activeMenu ? (
+                <span className="text-lg font-medium">
+                  {activeSubmenu ? activeSubmenu : activeMenu}
+                </span>
+              ) : (
+                <X className="h-6 w-6 " />
+              )}
+            </button>
+          </div>
+
+          <div className="overflow-y-auto bg-main h-full pb-20">
+            {!activeMenu && (
+              <nav className="p-4">
+                <ul className="space-y-6">
+                  <li>
+                    <Link
+                      href="/case-studies"
+                      className="text-xl font-medium text-white"
+                    >
+                      Our Project
+                    </Link>
+                  </li>
+
+                  <li>
+                    <button
+                      className="flex items-center justify-between w-full text-xl font-medium text-white"
+                      onClick={() => handleMenuClick('About')}
+                    >
+                      <span>About</span>
+                      <ChevronDown className="h-5 w-5" />
+                    </button>
+                  </li>
+
+                  <li>
+                    <button
+                      className="flex items-center justify-between w-full text-xl font-medium text-white"
+                      onClick={() => handleMenuClick('Services')}
+                    >
+                      <span>Services</span>
+                      <ChevronDown className="h-5 w-5" />
+                    </button>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="/how-we-deliver"
+                      className="text-xl font-medium text-white"
+                    >
+                      How we deliver
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="/how-we-deliver"
+                      className="text-xl font-medium text-white"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            )}
+
+            {activeMenu === 'Services' && !activeSubmenu && (
+              <div className="p-4">
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                    SOFTWARE DELIVERY
+                  </h3>
+                  <ul className="space-y-4">
+                    <li>
+                      <button
+                        className="flex items-center text-white w-full"
+                        onClick={() => handleSubmenuClick('Development')}
+                      >
+                        <span className="mr-2">→</span> Development
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="flex items-center text-white w-full"
+                        onClick={() => handleSubmenuClick('Modernization')}
+                      >
+                        <span className="mr-2">→</span> Modernization
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="flex items-center text-white w-full"
+                        onClick={() => handleSubmenuClick('AI & Data')}
+                      >
+                        <span className="mr-2">→</span> AI & Data
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="flex items-center text-white w-full"
+                        onClick={() => handleSubmenuClick('Cloud Engineering')}
+                      >
+                        <span className="mr-2">→</span> Cloud Engineering
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                    SPECIALISTS ON DEMAND
+                  </h3>
+                  <ul className="space-y-4">
+                    <li>
+                      <Link href="#" className="text-white">
+                        Staff Augmentation
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="#" className="text-white">
+                        Dedicated Teams
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'About' && (
+              <div className="p-4">
+                <ul className="space-y-4">
+                  <li>
+                    <Link href="#" className="text-white">
+                      Our Team
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="text-white">
+                      How Do We Work
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="#" className="text-white">
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
