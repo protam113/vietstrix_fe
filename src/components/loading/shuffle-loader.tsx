@@ -50,7 +50,7 @@ export default function ShuffleLoader({
   if (!isLoading) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#003049] text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-main text-white">
       <div className="relative w-24 h-24">
         <div className="grid grid-cols-3 grid-rows-3 gap-1">
           {squares.map((square) => (

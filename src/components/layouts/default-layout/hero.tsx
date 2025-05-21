@@ -272,7 +272,7 @@ export default function Hero() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-[#003049] relative overflow-hidden flex flex-col justify-center items-center px-4 sm:px-6"
+      className="min-h-screen bg-main relative overflow-hidden flex flex-col justify-center items-center px-4 sm:px-6"
       style={{
         backgroundImage: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.2), transparent 10%)`,
       }}
@@ -282,7 +282,7 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row my-auto items-start justify-between">
           <div className="my-auto">
             {/* Kickoff text with animation */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -297,7 +297,7 @@ export default function Hero() {
               >
                 Contact us now for expert consultation tailored to your needs!{' '}
               </motion.span>
-            </motion.div>
+            </motion.div> */}
 
             {/* Main headline */}
             <div className="relative text-white">
@@ -319,7 +319,7 @@ export default function Hero() {
                   TEA
                   <span className="relative">
                     M
-                    <span
+                    {/* <span
                       ref={greenDotRef}
                       className="absolute -right-4 top-0 w-10 h-10 rounded-full bg-green-400 transition-all duration-300 hover:scale-110"
                     >
@@ -330,7 +330,7 @@ export default function Hero() {
                         alt="Laurel icon"
                         className="h-8 w-8 md:h-10 md:w-10"
                       />
-                    </span>
+                    </span> */}
                   </span>
                 </h1>
               </motion.div>

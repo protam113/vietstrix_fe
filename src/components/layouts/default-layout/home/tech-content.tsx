@@ -27,6 +27,7 @@ import {
   SiMariadb,
   SiCloudinary,
   SiTailwindcss,
+  SiNestjs,
 } from 'react-icons/si';
 import { DiMsqlServer } from 'react-icons/di';
 import { VscAzure } from 'react-icons/vsc';
@@ -112,6 +113,10 @@ const techContent = {
       {
         name: 'Django',
         icon: <SiDjango className="h-10 w-10 text-green-800" />,
+      },
+      {
+        name: 'Nestjs',
+        icon: <SiNestjs className="h-10 w-10 text-red-700" />,
       },
       {
         name: 'Spring',

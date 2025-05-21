@@ -44,6 +44,18 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+@theme {
+  --color-main: #013162;
+  --color-main-50: #eef7ff;
+  --color-main-100: #ddefff;
+  --color-main-200: #b3e0ff;
+  --color-main-300: #6fc9ff;
+  --color-main-400: #23aeff;
+  --color-main-600: #0074dd;
+  --color-main-700: #005bb2;
+  --color-main-800: #004e93;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

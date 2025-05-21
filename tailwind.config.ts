@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      willChange: {
+        dropdown: 'transform, opacity',
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

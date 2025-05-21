@@ -29,7 +29,7 @@ export function StatsSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="w-full bg-[#003049] py-16 px-4 ">
+    <div ref={sectionRef} className="w-full bg-main py-16 px-4 ">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           {/* Timeline connector */}

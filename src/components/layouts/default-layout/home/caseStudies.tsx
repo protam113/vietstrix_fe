@@ -58,7 +58,11 @@ export default function PortfolioShowcase() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div className="space-y-4 mb-6 md:mb-0">
             <div className="flex items-center">
-              <SectionHeader title="Our Projects" />
+              <SectionHeader
+                title="See tangible
+outcomes
+"
+              />
             </div>
             <p className="text-zinc-400">
               Showcase of some of my recent sleek websites

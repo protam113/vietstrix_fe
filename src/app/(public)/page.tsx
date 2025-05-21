@@ -40,22 +40,6 @@ export default function Home() {
           <TechnologyExpertise />
           <Separator className="my-4" />
 
-          {/*  <Container>
-            <motion.div
-              className=" mb-12"
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <SectionHeader title="Our Process" />
-
-              <p className="mt-4 text-lg text-muted-foreground">
-                The evolution of Flowers & Saints through the years
-              </p>
-            </motion.div>
-            <Timeline />
-          </Container>
-          <Separator className="my-4" />
-*/}
           <NomineesPage />
           <Separator className="my-4" />
           {/* <Iridescence /> */}

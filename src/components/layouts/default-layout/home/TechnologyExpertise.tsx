@@ -2,19 +2,6 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-// import {
-//   Code,
-//   Database,
-//   Cloud,
-//   Server,
-//   SmartphoneIcon as Mobile,
-//   Shield,
-//   BarChart,
-//   Users,
-//   Layout,
-//   Monitor,
-//   Building2,
-// } from "lucide-react";
 import TechContent from './tech-content';
 import SectionHeader from '@/components/design/SectionHeader';
 
@@ -45,7 +32,7 @@ export default function TechnologyExpertise() {
               className={cn(
                 'flex items-center justify-center px-4 py-2 rounded-full border text-sm font-medium transition-all',
                 activeCategory === category.id
-                  ? 'bg-[#013162] text-white border-[#739dc7] shadow-md'
+                  ? 'bg-main text-white border-[#739dc7] shadow-md'
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-200'
               )}
             >
