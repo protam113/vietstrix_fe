@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Container from '../container/container';
 
 export function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,7 @@ export function StatsSection() {
 
   return (
     <div ref={sectionRef} className="w-full bg-main py-16 px-4 ">
-      <div className="max-w-6xl mx-auto">
+      <Container className="mx-auto">
         <div className="relative">
           {/* Timeline connector */}
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gray-700">
@@ -77,7 +78,7 @@ export function StatsSection() {
             />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

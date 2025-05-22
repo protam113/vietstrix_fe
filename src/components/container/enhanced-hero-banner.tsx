@@ -93,7 +93,7 @@ export default function EnhancedHeroBanner({
 
   const scrollToContent = () => {
     window.scrollTo({
-      top: 800, // Scroll xuống đúng 800px
+      top: 750, // Scroll xuống đúng 800px
       behavior: 'smooth', // Mượt mà
     });
   };
@@ -101,7 +101,7 @@ export default function EnhancedHeroBanner({
   return (
     <div
       ref={heroRef}
-      className="relative w-full h-[800px] bg-[#003049] overflow-hidden"
+      className="relative w-full h-[800px] bg-main overflow-hidden"
     >
       {/* Cursor follower dot */}
       <div

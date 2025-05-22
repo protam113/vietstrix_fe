@@ -11,8 +11,10 @@ import Container from '@/components/container/container';
 import { StatsSection } from '@/components/design/StatsSection';
 import IntroSection from '@/components/pages/public/introSection';
 import { ContactForm } from '@/components/form/ContactForm';
-import HeroGeometric from '@/components/pages/public/our-team/AboutHeroBanner';
 import AgencyPortfolio from '@/components/pages/public/our-team/AgencyPortfolio';
+import TechnologyExpertise from '@/components/layouts/default-layout/home/TechnologyExpertise';
+import FAQSection from '@/components/container/FaQ';
+import EnhancedHeroBanner from '@/components/container/enhanced-hero-banner';
 
 export const Feedback = () => {
   return (
@@ -93,11 +95,15 @@ export default function Page() {
       />
 
       <div>
-        <HeroGeometric />
+        <EnhancedHeroBanner
+          title="Our Team"
+          heading="Bring Your Vision to Life"
+          subheading="Big ideas? Bold goals? We turn concepts into powerful digital experiences that stand out."
+        />
         <IntroSection />
         <StatsSection />
         <AgencyPortfolio />
-
+        <TechnologyExpertise />
         {/* Team Section */}
         <Container>
           <motion.div
@@ -187,6 +193,7 @@ export default function Page() {
         <Feedback />
         {/* CTA Section */}
         <ContactForm />
+        <FAQSection />
       </div>
     </>
   );

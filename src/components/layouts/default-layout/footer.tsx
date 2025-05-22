@@ -7,6 +7,12 @@ import { motion } from 'framer-motion';
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
+  const items = [
+    { id: 1, label: 'Services', href: '/services' },
+    { id: 2, label: 'Blogs', href: '/blogs' },
+    { id: 3, label: 'Projects', href: '/our-team/projects' },
+  ];
+
   return (
     <footer className="bg-black text-white min-h-[600px] flex flex-col justify-between p-8 md:p-12">
       <div className="space-y-12">
@@ -42,17 +48,17 @@ export default function Footer() {
 
         <div className="flex justify-between pt-12">
           <nav className="space-y-4">
-            {['Services', 'Products', 'Blogs'].map((item) => (
+            {items.map((item) => (
               <motion.div
-                key={item}
+                key={item.id}
                 whileHover={{ x: 10 }}
                 className="overflow-hidden"
               >
                 <Link
-                  href="#"
+                  href={item.href}
                   className="text-xl md:text-2xl lg:text-3xl font-medium hover:text-zinc-300 transition-colors"
                 >
-                  {item}
+                  {item.label}
                 </Link>
               </motion.div>
             ))}

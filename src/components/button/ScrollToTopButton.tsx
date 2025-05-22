@@ -3,6 +3,7 @@
 import { ArrowUp, Facebook } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { FaLinkedin } from 'react-icons/fa';
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,7 +24,7 @@ const ScrollToTopButton: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-center gap-3 z-50">
       <a
-        href="https://m.me/your_facebook_username"
+        href="https://www.facebook.com/VietStrix.dev"
         target="_blank"
         rel="noopener noreferrer"
         className="w-12 h-12 bg-[#1877F2] text-white rounded-full shadow-md hover:bg-[#145DBF] flex items-center justify-center transition duration-300"
@@ -33,13 +34,13 @@ const ScrollToTopButton: React.FC = () => {
       </a>
 
       <a
-        href="https://zalo.me/your_zalo_id"
+        href="https://www.linkedin.com/in/hoangpham-strix/"
         target="_blank"
         rel="noopener noreferrer"
         className="w-12 h-12 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 flex items-center justify-center transition duration-300"
         aria-label="Zalo"
       >
-        <Image src="/icons/logo.svg" alt="zalo icon" width={40} height={40} />
+        <FaLinkedin size={20} />
       </a>
 
       {isVisible && (

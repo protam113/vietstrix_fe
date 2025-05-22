@@ -14,15 +14,6 @@ export default function NomineesPage() {
             <h1 className="text-5xl font-bold text-[#222] sm:text-6xl md:text-7xl lg:text-8xl">
               Our Blogs
             </h1>
-            <div className="absolute -right-6 bottom-0 md:-right-8">
-              <Image
-                src="LogoCricle.svg"
-                width={40}
-                height={40}
-                alt="Laurel icon"
-                className="h-8 w-8 md:h-10 md:w-10"
-              />
-            </div>
           </div>
           <p className="mt-4 text-sm text-gray-600 md:text-base">
             Explore in-depth case studies showcasing our latest web projects,
@@ -59,7 +50,7 @@ interface Nominee {
 
 function NomineeCard({ nominee }: { nominee: Nominee }) {
   return (
-    <div className="group cursor-pointer overflow-hidden rounded-lg">
+    <div className="group cursor-pointer overflow-hidden g">
       <div className="relative h-[280px] overflow-hidden">
         <Image
           src={nominee.image || '/placeholder.svg'}
@@ -73,7 +64,7 @@ function NomineeCard({ nominee }: { nominee: Nominee }) {
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600">by</span>
           <div className="flex items-center gap-2">
-            <div className="relative h-6 w-6 overflow-hidden rounded-full">
+            <div className="relative h-6 w-6 overflow-hidden ">
               <Image
                 src="LogoCricle.svg"
                 alt="Profile Image"
@@ -94,18 +85,18 @@ const nominees: Nominee[] = [
     id: 1,
     title: 'Portfolio 25',
 
-    image: '/image/portfolio/blog 1.png',
+    image: '/imgs/banner4.jpg',
   },
   {
     id: 2,
     title: 'Mario Roudil',
 
-    image: '/image/portfolio/news 1.png',
+    image: '/imgs/banner4.jpg',
   },
   {
     id: 3,
     title: 'Investor 3D Website | PeachWeb',
 
-    image: '/image/portfolio/build 1.png',
+    image: '/imgs/banner4.jpg',
   },
 ];

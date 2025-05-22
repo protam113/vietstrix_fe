@@ -1,5 +1,6 @@
 'use client';
 
+import LoadingBanner from '@/components/animation/loading-banner';
 import ScrollToTopButton from '@/components/button/ScrollToTopButton';
 import DefaultLayout from '@/components/layouts/default-layout/default.layout';
 import ShuffleLoader from '@/components/loading/shuffle-loader';
@@ -14,7 +15,7 @@ export default function CustomerLayoutDefault({
 
   return (
     <>
-      {loading && <ShuffleLoader onLoadingComplete={() => setLoading(false)} />}
+      {loading && <LoadingBanner onLoadingComplete={() => setLoading(false)} />}
       {!loading && (
         <DefaultLayout>
           <div>{children}</div>
