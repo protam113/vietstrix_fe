@@ -7,42 +7,46 @@ import { PremiumLoaderProps } from '@/types/components.type';
 export default function ShuffleLoader({
   onLoadingComplete,
 }: PremiumLoaderProps) {
-  const [squares, setSquares] = useState([
-    { id: 1, x: 0, y: 0, visible: true },
-    { id: 2, x: 1, y: 0, visible: true },
-    { id: 3, x: 2, y: 0, visible: true },
-    { id: 4, x: 0, y: 1, visible: true },
-    { id: 5, x: 1, y: 1, visible: true },
-    { id: 6, x: 2, y: 1, visible: true },
-    { id: 7, x: 0, y: 2, visible: true },
-    { id: 8, x: 1, y: 2, visible: true },
-    { id: 9, x: 2, y: 2, visible: true },
-  ]);
+  const [squares, setSquares] = useState(
+    Array.from({ length: 9 }, (_, i) => ({
+      id: i + 1,
+      x: i % 3,
+      y: Math.floor(i / 3),
+      visible: true,
+    }))
+  );
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const animationInterval = setInterval(() => {
       setSquares((prev) => {
+        const visibleCount = prev.filter((s) => s.visible).length;
         return prev.map((square) => {
-          const visibleCount = prev.filter((s) => s.visible).length;
           if (visibleCount <= 4 && square.visible) return square;
-
           return {
             ...square,
             visible: Math.random() > 0.3,
           };
         });
       });
-    }, 300);
 
-    // ⏱ Loader sẽ chạy trong 2 giây rồi gọi callback
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(animationInterval);
+          return 100;
+        }
+        return prev + 2.5;
+      });
+    }, 100); // Update every 100ms
+
     const timeout = setTimeout(() => {
       setIsLoading(false);
-      onLoadingComplete?.(); // 👈 gọi callback sau khi loading kết thúc
-    }, 2000);
+      onLoadingComplete?.(); // ✅ Callback when done
+    }, 2000); // ⏱ 2s total loader time
 
     return () => {
-      clearInterval(interval);
+      clearInterval(animationInterval);
       clearTimeout(timeout);
     };
   }, [onLoadingComplete]);
@@ -50,7 +54,7 @@ export default function ShuffleLoader({
   if (!isLoading) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-main text-white">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-main text-white">
       <div className="relative w-24 h-24">
         <div className="grid grid-cols-3 grid-rows-3 gap-1">
           {squares.map((square) => (
@@ -65,6 +69,16 @@ export default function ShuffleLoader({
               className="w-7 h-7 bg-white"
             />
           ))}
+        </div>
+      </div>
+      <div className="w-64 mt-4">
+        <div className="h-2 w-full rounded-full bg-gray-400">
+          <motion.div
+            className="h-full rounded-full bg-blue-500"
+            initial={{ width: '0%' }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.3 }}
+          />
         </div>
       </div>
     </div>

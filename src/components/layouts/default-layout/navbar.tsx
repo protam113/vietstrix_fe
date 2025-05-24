@@ -6,15 +6,18 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import GetStartedButton from '@/components/animata/container/AnimatedTrailProps';
+import { cn } from '@/lib/utils';
 
 const NavBar = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/our-team' },
+    { name: 'SHOW CASE', path: '/projects' },
     { name: 'SERVICES', path: '/services' },
     { name: 'BLOG', path: '/blogs' },
     { name: 'HOW DO WE WORK', path: '/work' },
@@ -37,39 +40,45 @@ const NavBar = () => {
     <>
       {/* Desktop Navigation */}
       <div
-        className={`fixed z-50 px-4 lg:px-8 w-full flex justify-center items-center min-h-[80px] ${
-          isScrolling ? 'bg-white/10 backdrop-blur-2xl' : 'bg-transparent'
+        className={`fixed z-50 w-full flex justify-center items-center min-h-[80px] ${
+          isScrolling ? 'bg-transparent' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-8xl w-full mx-auto px-6 py-2 shadow-sm bg-white">
-          <nav className="flex items-center justify-between gap-4 md:gap-8">
-            {/* Left section - Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 flex items-center justify-center">
-                <Image
-                  src="/icons/logo.svg"
-                  alt="Logo"
-                  width={30}
-                  height={30}
-                />
-              </div>
-              <div className="flex flex-col font-semibold text-main">
-                <span className="text-xl leading-none font-semibold uppercase">
-                  VIETSTRIX®
-                </span>
-                <span className="text-xl leading-none font-semibold uppercase">
-                  TEAM
-                </span>
-              </div>
-            </Link>
+        <div className="max-w-7xl w-full mx-auto py-2 ">
+          <nav className="flex items-center justify-between gap-4 md:gap-8 max-w-screen-xl mx-auto px-4">
+            <div
+              className={`flex items-center gap-6  h-[75px] px-4
+    ${isScrolling ? 'bg-white/40 backdrop-blur-2xl shadow-lg' : 'bg-white'}
+  `}
+            >
+              {/* Left section - Logo */}
+              <Link href="/" className="flex items-center gap-2 pl-4">
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <Image
+                    src="/icons/logo.svg"
+                    alt="Logo"
+                    width={30}
+                    height={30}
+                  />
+                </div>
+                <div className="flex flex-col font-semibold text-main">
+                  <span className="text-xl leading-none font-semibold uppercase">
+                    VIETSTRIX®
+                  </span>
+                  <span className="text-xl leading-none font-semibold uppercase">
+                    TEAM
+                  </span>
+                </div>
+              </Link>
+              <div className="hidden w-4 h-0.5 rotate-90 bg-gray-500"></div>
 
-            {/* Center section - Navigation Links */}
-            <div className="hidden md:flex px-4 py-2 gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className={`
+              {/* Center section - Navigation Links */}
+              <div className="hidden md:flex px-4 py-2 gap-2">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    className={`
                     px-3 py-1 text-sm font-medium  transition-all duration-300 ease-in-out text-main
                    
                     ${
@@ -79,25 +88,44 @@ const NavBar = () => {
                     }
                    
                   `}
-                >
-                  {item.name}
-                </Link>
-              ))}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             </div>
+            <div className="flex items-center gap-4 ml-auto">
+              <button
+                onClick={() => setIsOpen(true)}
+                className={`hidden p-2 h-[75px] w-[100px] text-black hover:opacity-90 transition-opacity cursor-pointer z-50 md:flex items-center justify-center gap-2
+    ${isScrolling ? 'bg-white/40 backdrop-blur-2xl shadow-lg' : 'bg-white'}
+  `}
+                aria-label="Open menu"
+              >
+                <span className="text-sm font-semibold text-main">MORE</span>
+                <div className="flex flex-col justify-center gap-1">
+                  <span className="block w-6 h-0.5 bg-main"></span>
+                  <span className="block w-4 h-0.5 bg-main"></span>
+                </div>
+              </button>
 
-            {/* Right section - Contact Button */}
-            <div className="hidden md:flex items-center gap-2">
-              <GetStartedButton text="Get in Touch" url="/contact-us" />
+              {/* Right section - Contact Button */}
+              <div className="hidden md:flex items-center gap-2">
+                <GetStartedButton text="Contact Us" url="/contact-us" />
+              </div>
             </div>
-
             {/* Mobile menu button */}
             <button
-              className="md:hidden w-8 h-8 flex flex-col justify-center items-center gap-1"
+              className={`md:hidden h-[75px] w-[100px] flex items-center justify-center gap-2
+    ${isScrolling ? 'bg-white/40 backdrop-blur-2xl shadow-lg' : 'bg-white'}
+  `}
               onClick={toggleMobileMenu}
             >
-              <span className="w-5 h-0.5 bg-black"></span>
-              <span className="w-5 h-0.5 bg-black"></span>
-              <span className="w-5 h-0.5 bg-black"></span>
+              <span className="text-sm font-semibold text-main">MENU</span>
+              <div className="flex flex-col justify-center gap-1">
+                <span className="w-6 h-0.5 bg-black"></span>
+                <span className="w-4 h-0.5 bg-black"></span>
+              </div>
             </button>
           </nav>
         </div>

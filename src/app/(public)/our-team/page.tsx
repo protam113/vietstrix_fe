@@ -171,25 +171,8 @@ export default function Page() {
           </div>
         </Container>
 
-        <section className="container mx-auto px-4 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-8"
-          >
-            <h2 className="text-3xl font-bold mb-4">How We do Work</h2>
-            <p className="text-gray-600">
-              We follow a collaborative and transparent approach to every
-              project, ensuring clear communication at every stage. From initial
-              concept to final delivery.
-            </p>
-          </motion.div>
-          <div className="mt-8">
-            <ProcessTimeline />
-          </div>
-        </section>
+        <ProcessTimeline />
+
         <Feedback />
         {/* CTA Section */}
         <ContactForm />

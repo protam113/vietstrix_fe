@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Container from '@/components/container/container';
+import Header from '@/components/design/Header';
+import SectionHeader from '@/components/design/SectionHeader';
 
 export default function PortfolioShowcase() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -52,16 +54,12 @@ export default function PortfolioShowcase() {
   }, []);
 
   return (
-    <div className="bg-black py-16 px-4 md:px-8">
+    <div className=" py-16 px-4 md:px-8">
       {/* Header section */}
       <Container className="mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div className="space-y-4 mb-6 md:mb-0">
-            <div className="flex items-center">
-              <h2 className="text-4xl font-bold text-white uppercase mt-4 mb-4 flex items-center gap-2">
-                <ArrowUpRight size={40} strokeWidth={1.5} /> Our Projects
-              </h2>
-            </div>
+            <SectionHeader title="Our Services" />
             <p className="text-zinc-400">
               Showcase of some of my recent sleek websites
             </p>
